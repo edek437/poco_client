@@ -4,12 +4,27 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../Help.cpp \
+../Message.cpp \
+../Nick.cpp \
+../Quit.cpp \
+../Who.cpp \
 ../poco_client.cpp 
 
 OBJS += \
+./Help.o \
+./Message.o \
+./Nick.o \
+./Quit.o \
+./Who.o \
 ./poco_client.o 
 
 CPP_DEPS += \
+./Help.d \
+./Message.d \
+./Nick.d \
+./Quit.d \
+./Who.d \
 ./poco_client.d 
 
 
