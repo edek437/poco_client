@@ -13,11 +13,14 @@
 #include "Poco/Net/StreamSocket.h"
 
 class Nick: public Option {
-	std::string name;
+	static std::string old_name;
+	std::string new_name;
 	Poco::Net::StreamSocket socket;
 public:
 	Nick(const std::string& in_name, Poco::Net::StreamSocket& in_socket);
 	void execute();
 	~Nick();
 };
+
+
 #endif /* NICK_H_ */

@@ -15,11 +15,10 @@ Who::Who(Poco::Net::StreamSocket in_socket) :
 }
 
 void Who::execute() {
-//TODO: send request about people connected + data about them
 //TODO: make it more safe (what if we get more than 1024 bytes?)
-	char command[]="who";
-	char * answer[1024];
-	socket.sendBytes((char*)command, strlen(command));
+	std::string command="who";
+	char answer[1024];
+	socket.sendBytes((char*)command.c_str(), command.size());
 	int rec=socket.receiveBytes(answer,sizeof(answer));
 	answer[rec]='\0';
 	std::cout<<answer<<std::endl;

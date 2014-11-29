@@ -19,37 +19,41 @@
 #include "Who.h"
 #include "Message.h"
 
-std::string token_to_string(Poco::StringTokenizer& tok) {
-	std::string message="";
-	for (unsigned int it = 1; it < tok.count(); it++) { //because tok[0] is command and rest is message
-		message+=tok[it];
-		message+=" ";
+std::string get_command(std::string& input){ //get command and erase it from input string
+	int i=0;
+	std::string output;
+	while(!(input[i]==' '||input.begin()+i==input.end())){
+		output.push_back(input[i]);
+		i++;
 	}
-	if(message.size()!=0)
-		message.substr(0,message.size()-1);
-	return message;
+	input.erase(0,i); //erasing command part form string
+	return output;
 }
 
 //TODO: add new implemented classes to factory
 Option *option_factory(Poco::Net::StreamSocket& socket,
-		Poco::StringTokenizer& tok) {
-	if (tok[0] == "help" || tok[0] == "h")
+		std::string option) {
+	std::string command=get_command(option);
+	if (command == "help" || command == "h")
 		return new Help();
-	else if (tok[0] == "quit" || tok[0] == "q")
+	else if (command == "quit" || command == "q")
 		return new Quit(socket);
-	else if (tok[0]=="who")
+	else if (command == "who")
 		return new Who(socket);
-	else {
-		std::cerr << "Option \"" << tok[0] << "\" doesn't exists\n";
+	else if (command == "nick") {
+		if(option.empty()){
+			std::cout<<"Wrong use of command nick: good one is nick [name]"<<std::endl;
+			return NULL;
+		}
+		return new Nick(option, socket);
+	} else {
+		std::cerr << "Option \"" << command << "\" doesn't exists\n";
 		return NULL;
 	}
 }
 
 void handle_option(std::string& option, Poco::Net::StreamSocket& socket) {
-	Poco::StringTokenizer tok(option, " ",
-			Poco::StringTokenizer::TOK_TRIM
-					| Poco::StringTokenizer::TOK_IGNORE_EMPTY);
-	Option * op = option_factory(socket, tok);
+	Option * op = option_factory(socket, option);
 	Poco::SharedPtr<Option> pop(op);
 	if (!op)
 		return;
