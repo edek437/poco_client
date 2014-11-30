@@ -26,7 +26,10 @@ std::string get_command(std::string& input){ //get command and erase it from inp
 		output.push_back(input[i]);
 		i++;
 	}
-	input.erase(0,i); //erasing command part form string
+	if(input[i]==' ')
+		input.erase(0,i+1); //erasing command part form string
+	else
+		input.erase(0,i);
 	return output;
 }
 
