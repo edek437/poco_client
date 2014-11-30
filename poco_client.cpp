@@ -7,7 +7,6 @@
 
 #include "Poco/Net/SocketAddress.h"
 #include "Poco/Net/StreamSocket.h"
-#include "Poco/StringTokenizer.h"
 #include "Poco/SharedPtr.h"
 #include <iostream>
 #include <string.h>
@@ -49,7 +48,15 @@ Option *option_factory(Poco::Net::StreamSocket& socket,
 			return NULL;
 		}
 		return new Nick(option, socket);
-	} else {
+	}
+	else if (command == "msg" || command == "message"){
+		if(option.empty()){
+			std::cout<<"Wrong use of command message(msg): good one is msg [name] and later type message"<<std::endl;
+			return NULL;
+		}
+		return new Message(socket,option);
+	}
+	else {
 		std::cerr << "Option \"" << command << "\" doesn't exists\n";
 		return NULL;
 	}

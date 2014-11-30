@@ -13,13 +13,12 @@ Help::Help() {
 
 }
 
-void Help::execute(){
+void Help::execute() {
 	std::cout
 			<< "Options(shortcuts):\n help(h)=print this text\n"
-					"con(c)=connect to server\n"
 					"quit(q)=end connection\n"
 					"nick name= another client see you as name (your IP and port by default\n"
-					"msg name message= send to name the message\n"
+					"message(msg) name message= send to name the message (first type msg name. If you enter proper name programm will ask you to type message\n"
 					"who= print who you can write to\n";
 }
 

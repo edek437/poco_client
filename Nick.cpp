@@ -19,7 +19,7 @@ void Nick::execute() {
 	bool odp;
 	bool *odpowiedz=&odp;
 	socket.sendBytes((char*)command.c_str(), command.size());
-	int rec=socket.receiveBytes((bool*)odpowiedz, sizeof(bool));
+	socket.receiveBytes((bool*)odpowiedz, sizeof(bool));
 	if(odp){
 		std::cout<<"name changed\n";
 		old_name=new_name;
