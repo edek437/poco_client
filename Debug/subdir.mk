@@ -11,6 +11,9 @@ CPP_SRCS += \
 ../Quit.cpp \
 ../Receiver.cpp \
 ../Who.cpp \
+../get_command.cpp \
+../handle_option.cpp \
+../option_factory.cpp \
 ../poco_client.cpp 
 
 OBJS += \
@@ -21,6 +24,9 @@ OBJS += \
 ./Quit.o \
 ./Receiver.o \
 ./Who.o \
+./get_command.o \
+./handle_option.o \
+./option_factory.o \
 ./poco_client.o 
 
 CPP_DEPS += \
@@ -31,6 +37,9 @@ CPP_DEPS += \
 ./Quit.d \
 ./Receiver.d \
 ./Who.d \
+./get_command.d \
+./handle_option.d \
+./option_factory.d \
 ./poco_client.d 
 
 
