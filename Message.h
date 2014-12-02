@@ -14,7 +14,6 @@
 class Message: public Option {
 	Poco::Net::StreamSocket socket;
 	std::string name;
-
 public:
 	Message(const Poco::Net::StreamSocket& in_socket, std::string str);
 	void execute();
