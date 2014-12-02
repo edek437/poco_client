@@ -8,6 +8,7 @@
 #ifndef OPTION_FACTORY_H_
 #define OPTION_FACTORY_H_
 
+#include "Person.h"
 #include "Option.h"
 #include "Help.h"
 #include "Quit.h"
@@ -18,7 +19,7 @@
 #include "Inbox.h"
 
 Option *option_factory(Poco::Net::StreamSocket& socket, std::string& option,
-		std::string *old, bool *up, std::vector<std::string> *db);
+		std::string *old, bool *up, std::vector<Person> *db);
 
 
 

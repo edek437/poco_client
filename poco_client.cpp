@@ -11,8 +11,6 @@
 #include "Poco/SharedPtr.h"
 #include "Poco/Thread.h"
 #include <iostream>
-#include <vector>
-#include <string>
 #include "handle_option.h"
 
 
@@ -21,8 +19,7 @@ int main(int argc, char** argv) {
 	if(argc==1)  serv_ip="localhost";
 	else serv_ip=argv[0];
 //TODO: improve this to chatbox with each person separately
-//	std::vector<Person>, where struct Person {std::string name; std::vector<std::string> messagebox; FILE* file;}
-	std::vector<std::string> message_db;
+	std::vector<Person> message_db;
 	bool if_new = false;
 	std::cout << "Connecting to server" << std::endl;
 	try {

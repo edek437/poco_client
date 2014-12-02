@@ -10,7 +10,7 @@
 #include <iostream>
 
 Option *option_factory(Poco::Net::StreamSocket& socket, std::string& option,
-		std::string *old, bool *up, std::vector<std::string> *db) {
+		std::string *old, bool *up, std::vector<Person> *db) {
 	std::string command = get_command(option);
 	if (command == "help" || command == "h")
 		return new Help();
@@ -32,7 +32,7 @@ Option *option_factory(Poco::Net::StreamSocket& socket, std::string& option,
 					<< std::endl;
 			return NULL;
 		}
-		return new Message(socket, option);
+		return new Message(socket, option,db,old);
 	} else if (command == "inbox") {
 		return new Inbox(db,up);
 	} else if (command == "whoami") {

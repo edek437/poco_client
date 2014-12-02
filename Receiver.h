@@ -11,15 +11,16 @@
 #include "Poco/Runnable.h"
 #include "Poco/Net/StreamSocket.h"
 #include "Poco/Mutex.h"
+#include "Person.h"
 
 class Receiver : public Poco::Runnable{
 	Poco::Net::StreamSocket socket;
 	Poco::Mutex *mutex;
 	bool* update;
 	std::string *old_name;
-	std::vector<std::string> *message_db;
+	std::vector<Person> *message_db;
 public:
-	Receiver(Poco::Net::StreamSocket& sock, Poco::Mutex *mut, bool* up,std::string *old,std::vector<std::string> *db);
+	Receiver(Poco::Net::StreamSocket& sock, Poco::Mutex *mut, bool* up,std::string *old,std::vector<Person> *db);
 	void run();
 	virtual ~Receiver();
 };

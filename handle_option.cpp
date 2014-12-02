@@ -9,7 +9,7 @@
 #include "Poco/SharedPtr.h"
 
 void handle_option(std::string& option, Poco::Net::StreamSocket& socket,
-		std::string *old, bool *up, std::vector<std::string> *db) {
+		std::string *old, bool *up, std::vector<Person> *db) {
 	Option * op = option_factory(socket, option, old, up, db);
 	Poco::SharedPtr<Option> pop(op);
 	if (!op)

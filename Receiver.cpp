@@ -10,14 +10,16 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <algorithm>
 #include <boost/regex.hpp>
 
 Receiver::Receiver(Poco::Net::StreamSocket& sock, Poco::Mutex *mut, bool *up,
-		std::string *old, std::vector<std::string> *db) :
+		std::string *old, std::vector<Person> *db) :
 		socket(sock), mutex(mut), update(up), old_name(old), message_db(db) {
 }
 
 void Receiver::run() {
+	boost::regex exp("(.*):(.*)");
 	for (;;) {
 		sleep(10);
 		mutex->lock();
@@ -31,7 +33,20 @@ void Receiver::run() {
 			mutex->unlock();
 		} else {
 			*update = true;
-			message_db->push_back(answer);
+			std::string name=boost::regex_replace(answer,exp,"\\1");
+			std::vector<Person>::iterator vit;
+			for(vit=message_db->begin();vit!=message_db->end();vit++){
+				if(vit->name==name){ //thank you eclipse. Wasted 1,5h to repair this "mistake"
+					break;
+				}
+			}
+			if (vit==message_db->end()){ //never coresponding with name before
+				message_db->push_back(Person(name,answer)); //thank you eclipse. Wasted 1,5h to repair this "mistake"
+			}
+			else{
+				vit->chatbox.push_back(answer); //another "mistake"
+				vit->is_new=true;
+			}
 			mutex->unlock();
 		}
 	}

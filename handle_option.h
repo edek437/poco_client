@@ -11,7 +11,7 @@
 #include "option_factory.h"
 
 void handle_option(std::string& option, Poco::Net::StreamSocket& socket,
-		std::string *old, bool *up, std::vector<std::string> *db);
+		std::string *old, bool *up, std::vector<Person> *db);
 
 
 
