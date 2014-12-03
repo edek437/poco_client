@@ -21,7 +21,7 @@ Receiver::Receiver(Poco::Net::StreamSocket& sock, Poco::Mutex *mut, bool *up,
 void Receiver::run() {
 	boost::regex exp("(.*):(.*)");
 	for (;;) {
-		//sleep(10);
+		sleep(10);
 		mutex->lock();
 		char message[1024];
 		std::string request = "new " + *old_name;

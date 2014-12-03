@@ -38,7 +38,7 @@ void Message::execute() {
 		std::vector<Person>::iterator vit=std::find_if(message_db->begin(),message_db->end(),[&name](const Person& p)->bool{return p.name==name;});
 		std::string formated_chatbox=*old+":"+message;
 		if(vit==message_db->end()){
-			message_db->push_back(Person(name,formated_chatbox));
+			message_db->push_back(Person(name,formated_chatbox,false));
 		}
 		else{
 			vit->chatbox.push_back(formated_chatbox);
